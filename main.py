@@ -59,14 +59,6 @@ def update():
 
 def updateFunction():
     try:
-        # conexion = sql.connect("inventario.sqlite")
-        # cursor = conexion.cursor()
-        # print("La conexion a SQLite ha sido abierta")
-        # # Permitimos el cambio de todos los cambios menos de id para que sea unico e inmutable
-        # sql_query = '''UPDATE producto SET name = ?, quantity = ?, price = ? WHERE id = ?'''
-        # cursor.execute(sql_query, (str(name_prod.get()), int(quantity_prod.get()), float(price_prod.get()), int(id_prod.get())))
-        # conexion.commit()
-        # print("El registro del producto ha sido actualizado")
         session = Session()
         producto1 = session.query(Producto).get(int(id_prod.get()))
 
@@ -76,12 +68,9 @@ def updateFunction():
         session.add(producto1)
         session.commit()
         print("El registro del producto ha sido actualizado")
-    except Exception as error:
-        print("Error al actualizar la tabla:", error)
+    except Exception:
+        print("Error al actualizar la tabla:")
     else:
-        # cursor.close()
-        # conexion.close()
-        # print("La conexion a SQLite ha sido cerrada")
         session.close()
         print("La conexion a SQLite ha sido cerrada")
     finally:
