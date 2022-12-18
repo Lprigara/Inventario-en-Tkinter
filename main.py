@@ -2,6 +2,8 @@ from tkinter import *
 import sqlite3 as sql
 import sys
 import os
+from producto import Producto
+from declarative_base import Session, engine, Base
 
 # Mostrar productos
 def show():
@@ -57,19 +59,30 @@ def update():
 
 def updateFunction():
     try:
-        conexion = sql.connect("inventario.sqlite")
-        cursor = conexion.cursor()
-        print("La conexion a SQLite ha sido abierta")
-        # Permitimos el cambio de todos los cambios menos de id para que sea unico e inmutable
-        sql_query = '''UPDATE producto SET name = ?, quantity = ?, price = ? WHERE id = ?'''
-        cursor.execute(sql_query, (str(name_prod.get()), int(quantity_prod.get()), float(price_prod.get()), int(id_prod.get())))
-        conexion.commit()
+        # conexion = sql.connect("inventario.sqlite")
+        # cursor = conexion.cursor()
+        # print("La conexion a SQLite ha sido abierta")
+        # # Permitimos el cambio de todos los cambios menos de id para que sea unico e inmutable
+        # sql_query = '''UPDATE producto SET name = ?, quantity = ?, price = ? WHERE id = ?'''
+        # cursor.execute(sql_query, (str(name_prod.get()), int(quantity_prod.get()), float(price_prod.get()), int(id_prod.get())))
+        # conexion.commit()
+        # print("El registro del producto ha sido actualizado")
+        session = Session()
+        producto1 = session.query(Producto).get(int(id_prod.get()))
+
+        producto1.name = str(name_prod.get())
+        producto1.quantity = int(quantity_prod.get())
+        producto1.price = float(price_prod.get())
+        session.add(producto1)
+        session.commit()
         print("El registro del producto ha sido actualizado")
-    except sql.Error as error:
+    except Exception as error:
         print("Error al actualizar la tabla:", error)
     else:
-        cursor.close()
-        conexion.close()
+        # cursor.close()
+        # conexion.close()
+        # print("La conexion a SQLite ha sido cerrada")
+        session.close()
         print("La conexion a SQLite ha sido cerrada")
     finally:
         id_prod.delete(0, END)
