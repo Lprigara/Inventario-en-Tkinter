@@ -1,27 +1,59 @@
-from producto import Producto
+from tkinter import *
+from main import ventanaInicio
 from declarative_base import Session, engine, Base
+from sqlalchemy import delete
 
-if __name__ == '__main__':
-    #Crea la BD
-    Base.metadata.create_all(engine)
 
-    #Abre la sesión
-    session = Session()
+#Establecemos la página eliminar datos del programa
+class Eliminar():    
 
-    #crear producto
-    producto1 = Producto(name = "Raqueta", quantity = 5, price = 19.99)
-    producto2 = Producto(name = "Pelota tenis", quantity = 10, price = 1.99)
-    producto3 = Producto(name = "Calcetines Nike", quantity = 7, price = 8.99)
-    producto4 = Producto(name = "Visera Nike", quantity = 5, price = 13.99)
+    def eliminadoDatos():
+        #Crea la BD
+        Base.metadata.create_all(engine)
 
-    #Insertar productos en BBDD
-    session.add(producto1)
-    session.add(producto2)
-    session.add(producto3)
-    session.add(producto4)
+        #Abre la sesión
+        session = Session()
 
-    #Commit
-    session.commit()
+        #Borramos los datos
+        session.delete().where(producto.c.name == eliminadoNombre)
 
-    #Close
-    session.close()
+        #Commit
+        session.commit()
+
+        #Close
+        session.close()
+    
+    
+    
+    def ventanaEliminar():
+
+        global ventanaEliminado
+        ventanaEliminado = Toplevel(ventanaInicio)
+        ventanaEliminado.title("Eliminado")
+        ventanaEliminado.state('zoomed')
+        
+        global imagen 
+        imagen = PhotoImage(file="imagen.png")
+        imagen = imagen.subsample(2,2)
+        Label(ventanaEliminado, image = imagen).pack()
+
+        Label(ventanaEliminado, text="Por favor el nombre del producto que desee eliminar:", bg="navy", fg="white", width="300", height="3", font=("Calibri", 15)).pack()
+        Label(ventanaEliminado, text="").pack()
+
+        global nombre
+
+
+        nombre = StringVar()
+
+
+        global eliminadoNombre
+
+
+
+        Label(ventanaEliminado, text="nombre").pack()
+        eliminadoNombre = Entry(ventanaEliminado, textvariable = nombre).pack()
+
+        Label(ventanaEliminado, text= "").pack()
+        Button(ventanaEliminado, text="Continuar",height="3", width="30" , command = eliminadoDatos ).pack()
+
+        
