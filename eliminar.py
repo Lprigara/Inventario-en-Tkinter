@@ -15,7 +15,9 @@ class Eliminar():
         session = Session()
 
         #Borramos los datos
-        session.delete().where(producto.c.name == eliminadoNombre)
+        borrado = producto.delete().where(producto.c.nombre == eliminadoNombre)
+        session.execute(borrado)
+        #session.execute(borrado).where(producto.c.name == eliminadoNombre)
 
         #Commit
         session.commit()
@@ -23,7 +25,7 @@ class Eliminar():
         #Close
         session.close()
     
-    
+
     
     def ventanaEliminar():
 
