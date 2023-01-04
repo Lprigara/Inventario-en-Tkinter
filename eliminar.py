@@ -53,6 +53,6 @@ class Eliminar():
         
 
         Label(ventanaEliminado, text= "").pack()
-        Button(ventanaEliminado, text="Continuar",height="3", width="30" , command = lambda: eliminadoDatos(nombre.get()) ).pack()
+        Button(ventanaEliminado, text="Continuar",height="3", width="30" , command = lambda: self.eliminadoDatos(nombre.get()) ).pack()
 
         
