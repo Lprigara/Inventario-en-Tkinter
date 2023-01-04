@@ -4,30 +4,21 @@ from declarative_base import Session, engine, Base
 from sqlalchemy import delete
 
 
-#Establecemos la página eliminar datos del programa
 class Eliminar():    
 
-    def eliminadoDatos():
-        #Crea la BD
-        Base.metadata.create_all(engine)
-
-        #Abre la sesión
+    def eliminadoDatos(self, nombre):
+        
         session = Session()
 
-        #Borramos los datos
-        borrado = producto.delete().where(producto.c.nombre == eliminadoNombre)
-        session.execute(borrado)
-        #session.execute(borrado).where(producto.c.name == eliminadoNombre)
+        session.query(Producto).filter(Producto.name == nombre).delete()
 
-        #Commit
         session.commit()
 
-        #Close
         session.close()
     
 
     
-    def ventanaEliminar():
+    def ventanaEliminar(self):
 
         global ventanaEliminado
         ventanaEliminado = Toplevel(ventanaInicio)
@@ -54,8 +45,14 @@ class Eliminar():
 
         Label(ventanaEliminado, text="nombre").pack()
         eliminadoNombre = Entry(ventanaEliminado, textvariable = nombre).pack()
+        
+        
+        eliminadoNombre = Entry(ventanaEliminado, textvariable = nombre)
+        eliminadoNombre.pack()
+        
+        
 
         Label(ventanaEliminado, text= "").pack()
-        Button(ventanaEliminado, text="Continuar",height="3", width="30" , command = eliminadoDatos ).pack()
+        Button(ventanaEliminado, text="Continuar",height="3", width="30" , command = lambda: eliminadoDatos(nombre.get()) ).pack()
 
         
