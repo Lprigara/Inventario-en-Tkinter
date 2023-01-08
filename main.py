@@ -65,14 +65,17 @@ def updateFunction():
         producto1.name = str(name_prod.get())
         producto1.quantity = int(quantity_prod.get())
         producto1.price = float(price_prod.get())
-        session.add(producto1)
-        session.commit()
-        print("El registro del producto ha sido actualizado")
+        if len(str(name_prod.get()).replace(" ", "")) != 0:
+            session.add(producto1)
+            session.commit()
+            print("El registro del producto ha sido actualizado")
+        else:
+            raise Exception
     except Exception:
-        print("Error al actualizar la tabla:")
+        print("Error al actualizar la tabla")
     else:
         session.close()
-        print("La conexion a SQLite ha sido cerrada")
+        print("La conexion con la base de datos ha sido cerrada")
     finally:
         id_prod.delete(0, END)
         name_prod.delete(0, END)
