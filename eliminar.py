@@ -1,12 +1,12 @@
 from tkinter import *
 from sqlalchemy import delete
-
-
+from declarative_base import Session, engine, Base
 
 def eliminadoDatos(nombre):
-    
+
+    Base.metadata.create_all(engine)
     session = Session()
-    session.query(Producto).filter(Producto.name == nombre).delete()
+    session.query(producto).filter(producto.name == nombre).delete()
     session.commit()
     session.close()
 
