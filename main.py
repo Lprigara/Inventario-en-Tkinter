@@ -1,5 +1,5 @@
 from tkinter import *
-from eliminar import Eliminar
+from eliminar import *
 
 #Establecemos la página principal del programa
 
@@ -18,6 +18,7 @@ def inicio():
     imagen = imagen.subsample(2,2)
     Label(ventanaInicio, image = imagen).pack()
 
+   
     Label(ventanaInicio, text="Acceso al sistema", bg="navy", fg="white", width="300", height="3", font=("Calibri", 15)).pack()
     Label(ventanaInicio, text="").pack()   
 
@@ -30,9 +31,8 @@ def inicio():
     Button(ventanaInicio, text = "Actualizar datos", height="3", width="30").pack()
     Label(ventanaInicio, text = "").pack()
     
-    Button(ventanaInicio, text="Eliminar datos", height="3", width="30", command = Eliminar.ventanaEliminar).pack()
-    
-    
+    Button(ventanaInicio, text="Eliminar datos", height="3", width="30", command = ventanaEliminar).pack()
+
 
     #Label(ventanaInicio, text = "Ejemplo texto").pack()    
     #Button(ventanaInicio, text="Ventana Ejemplo", height="3", width="30", command = funcionVentanaEjemplo).pack()    
