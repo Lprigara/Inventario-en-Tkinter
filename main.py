@@ -18,7 +18,7 @@ def update():
     global ventanaUpdate
     ventanaUpdate = Toplevel(ventanaInicio)
     ventanaUpdate.title("Actualizar datos")
-    ventanaInicio.state('normal')
+    ventanaInicio.state('zoomed')
     
     # Mostramos la imagen
     Label(ventanaUpdate, image = image).pack()
@@ -91,7 +91,7 @@ def create():
     global ventanaCreate
     ventanaCreate = Toplevel(ventanaInicio)
     ventanaCreate.title("Crear producto")
-    ventanaInicio.state('normal')
+    ventanaInicio.state('zoomed')
     
     # Mostramos la imagen
     Label(ventanaCreate, image = image).pack()
@@ -165,7 +165,7 @@ def inicio():
     global ventanaInicio
     ventanaInicio = Tk()
     ventanaInicio.title("Inicio")
-    ventanaInicio.state('normal')
+    ventanaInicio.state('zoomed')
     
     #Para añadir un icono de programa
     #ventanaInicio.iconbitmap("imagen2.ico")       

@@ -51,7 +51,7 @@ def showFunction():
 global ventanaShow
 ventanaShow = Tk()
 ventanaShow.title("Mostrar Productos")
-ventanaShow.state('normal')
+ventanaShow.state('zoomed')
 
 # Mostramos la imagen
 global image 
